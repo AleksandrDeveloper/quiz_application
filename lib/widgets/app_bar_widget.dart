@@ -18,7 +18,7 @@ class AppBarWidget extends StatelessWidget with PreferredSizeWidget {
     final width = MediaQuery.of(context).size.width - padding * 2;
     const height = 70.0;
     final theme = Theme.of(context);
-    const duration =   Duration(milliseconds: 250);
+    const duration = Duration(milliseconds: 250);
 
     return Center(
       child: Padding(

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quiz_application/bloc/welcome/welcome_bloc.dart';
 
 import 'configs/configs.dart';
 
@@ -12,12 +14,19 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appRoute = AppRoute();
-    return MaterialApp(
-      title: 'Quiz Application',
-      debugShowCheckedModeBanner: false,
-      theme: mainTheme(),
-      routes: appRoute.routes,
-      initialRoute: appRoute.initialRoutes,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => WelcomeBloc(),
+        ),
+      ],
+      child: MaterialApp(
+        title: 'Quiz Application',
+        debugShowCheckedModeBanner: false,
+        theme: mainTheme(),
+        routes: appRoute.routes,
+        initialRoute: appRoute.initialRoutes,
+      ),
     );
   }
 }
