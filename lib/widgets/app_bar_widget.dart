@@ -1,53 +1,65 @@
 import 'package:flutter/material.dart';
+import 'package:step_progress_indicator/step_progress_indicator.dart';
 
 class AppBarWidget extends StatelessWidget with PreferredSizeWidget {
   final String title;
   final bool isStart;
+  final int currentStep;
   const AppBarWidget({
     required this.title,
     required this.isStart,
+    required this.currentStep,
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final _padding = 16.0;
-    final _width = MediaQuery.of(context).size.width - _padding * 2;
-    final _height = 70.0;
-    final _theme = Theme.of(context);
+    const padding = 16.0;
+    final width = MediaQuery.of(context).size.width - padding * 2;
+    const height = 70.0;
+    final theme = Theme.of(context);
+    const duration =   Duration(milliseconds: 250);
 
     return Center(
       child: Padding(
-        padding: EdgeInsets.only(top: _padding * 2),
-        child: Container(
-          width: _width,
-          height: _height,
-          padding: EdgeInsets.symmetric(horizontal: _padding),
+        padding: const EdgeInsets.only(top: padding * 2),
+        child: AnimatedContainer(
+          duration: duration,
+          width: width,
+          height: isStart ? height - 30 : height,
+          padding: const EdgeInsets.symmetric(horizontal: padding),
           decoration: BoxDecoration(
-            color: _theme.cardColor,
+            color: theme.cardColor,
             borderRadius: BorderRadius.circular(25.0),
             boxShadow: [
               BoxShadow(
-                color: _theme.shadowColor,
+                color: theme.shadowColor,
                 spreadRadius: 5,
                 blurRadius: 7,
-                offset: Offset(0, 3),
+                offset: const Offset(0, 3),
               )
             ],
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              IconButton(onPressed: () {}, icon: Icon(Icons.ice_skating)),
-              Text(
-                title,
-                style: _theme.textTheme.headline2?.copyWith(
-                  color: _theme.shadowColor,
+          child: isStart
+              ? StepProgressIndicator(
+                  totalSteps: 10,
+                  currentStep: currentStep,
+                  selectedColor: theme.backgroundColor,
+                  unselectedColor: theme.focusColor,
+                  roundedEdges: const Radius.circular(10),
+                  size: 7,
+                )
+              : Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      title,
+                      style: theme.textTheme.headline1?.copyWith(
+                        color: theme.shadowColor,
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-              IconButton(onPressed: () {}, icon: Icon(Icons.ice_skating)),
-            ],
-          ),
         ),
       ),
     );
