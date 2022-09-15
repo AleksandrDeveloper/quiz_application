@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'configs/configs.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -7,27 +9,15 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final appRoute = AppRoute();
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(),
+      title: 'Quiz Application',
+      debugShowCheckedModeBanner: false,
+      theme: mainTheme(),
+      routes: appRoute.routes,
+      initialRoute: appRoute.initialRoutes,
     );
   }
 }
-
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
-
-
-

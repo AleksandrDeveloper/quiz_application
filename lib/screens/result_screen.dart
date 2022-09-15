@@ -1,3 +1,10 @@
-export 'welcome_screen.dart';
-export 'quiz_screen.dart';
-export 'result_screen.dart';
+import 'package:flutter/material.dart';
+
+class ResultScreen extends StatelessWidget {
+  const ResultScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
