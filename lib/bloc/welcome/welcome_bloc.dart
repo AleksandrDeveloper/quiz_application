@@ -37,7 +37,7 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
       return;
     }
     if (categoryName.isNotEmpty && difficultyName.isNotEmpty) {
-      emit(state.copyWith(processState: ProcessState.fine, isStart: true));
+      emit(state.copyWith(processState: ProcessState.fine));
     }
   }
 }

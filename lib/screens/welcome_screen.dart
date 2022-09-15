@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quiz_application/bloc/welcome/welcome_bloc.dart';
@@ -29,7 +30,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             ? Scaffold(
                 appBar: AppBarWidget(
                   title: 'Quiz Application',
-                  isStart: state.isStart,
+                  isStart: isStart,
                   currentStep: 1,
                 ),
                 backgroundColor: theme.backgroundColor,
@@ -49,40 +50,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   ),
                 ))
             : state.processState == ProcessState.fine
-                ? NextWidget()
+                ? const NextWidget()
                 : Container();
       },
-    );
-  }
-}
-
-class NextWidget extends StatefulWidget {
-  const NextWidget({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  State<NextWidget> createState() => _NextWidgetState();
-}
-
-class _NextWidgetState extends State<NextWidget> {
-  void initState() {
-    Future.delayed(const Duration(seconds: 3), () {
-      Navigator.of(context).pushNamed('quiz');
-    });
-    super.initState();
-  }
-
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
-    return Scaffold(
-      backgroundColor: theme.backgroundColor,
-      body: Column(children: [
-        Image(image: AssetImage(AppImages.start))
-      ],),
     );
   }
 }
