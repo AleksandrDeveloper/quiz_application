@@ -44,15 +44,18 @@ class QuizBloc extends Bloc<QuizEvent, QuizState> {
     NextQuizEvent event,
     Emitter<QuizState> emit,
   ) async {
-    currentQuiz + 1;
-    print(currentQuiz);
+    currentQuiz += 1;
     final quiz = listQuiz[currentQuiz];
     listAnswers.clear();
     final mapAnswers = quiz.answers.toJson();
     mapAnswers
         .forEach((k, v) => listAnswers.add(AnswersModal(name: k, answers: v)));
+    listAnswers.removeWhere((element) => element.answers == null);
     emit(state.copyWith(
         quiz: quiz, currentQuiz: currentQuiz, answers: listAnswers));
+    if(currentQuiz >= 10){
+      emit(state.copyWith(isFinish: true));
+    }
   }
 
   Future<void> _postQuiz(

@@ -4,11 +4,11 @@ import 'package:step_progress_indicator/step_progress_indicator.dart';
 class AppBarWidget extends StatelessWidget with PreferredSizeWidget {
   final String title;
   final bool isStart;
-  final int currentStep;
+  final int? currentStep;
   const AppBarWidget({
     required this.title,
     required this.isStart,
-    required this.currentStep,
+    this.currentStep,
     Key? key,
   }) : super(key: key);
 
@@ -26,7 +26,7 @@ class AppBarWidget extends StatelessWidget with PreferredSizeWidget {
         child: AnimatedContainer(
           duration: duration,
           width: width,
-          height: isStart ? height - 30 : height,
+          height: isStart! ? height - 30 : height,
           padding: const EdgeInsets.symmetric(horizontal: padding),
           decoration: BoxDecoration(
             color: theme.cardColor,
@@ -43,7 +43,7 @@ class AppBarWidget extends StatelessWidget with PreferredSizeWidget {
           child: isStart
               ? StepProgressIndicator(
                   totalSteps: 10,
-                  currentStep: currentStep,
+                  currentStep: currentStep ?? 0,
                   selectedColor: theme.backgroundColor,
                   unselectedColor: theme.focusColor,
                   roundedEdges: const Radius.circular(10),

@@ -15,7 +15,7 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
-  var isStart = false;
+
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +28,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         return state.processState == ProcessState.none ||
                 state.processState == ProcessState.error
             ? Scaffold(
-                appBar: AppBarWidget(
+                appBar: const AppBarWidget(
                   title: 'Quiz Application',
-                  isStart: isStart,
+                  isStart: false,
                   currentStep: 1,
                 ),
                 backgroundColor: theme.backgroundColor,
@@ -50,7 +50,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   ),
                 ))
             : state.processState == ProcessState.fine
-                ? const SplashScreen()
+                ? const SplashScreen(
+                    title: 'Приготовься и УДАЧИ!',
+                    image: AppImages.start,
+                    navigator: 'quiz',
+                  )
                 : Container();
       },
     );

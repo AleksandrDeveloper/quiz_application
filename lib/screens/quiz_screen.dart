@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quiz_application/bloc/quiz_bloc/quiz_bloc.dart';
-
+import 'package:quiz_application/configs/configs.dart';
 import '../widgets/widgets.dart';
 
 class QuizScreen extends StatefulWidget {
@@ -33,82 +33,57 @@ class _QuizScreenState extends State<QuizScreen> {
     return BlocBuilder<QuizBloc, QuizState>(
       builder: (context, state) {
         final quiz = state.quiz;
-        return Scaffold(
-          backgroundColor: theme.backgroundColor,
-          appBar: AppBarWidget(
-            title: 'Мы начинаем',
-            currentStep: state.currentQuiz,
-            isStart: isStart,
-          ),
-          body: ListView(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: padding),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 20.0),
-                      child: Text(
-                        quiz!.question ?? '',
-                        style: theme.textTheme.headline1
-                            ?.copyWith(color: theme.cardColor, fontSize: 35),
+        final listAnswers = state.answers;
+        if (state.isFinish == false) {
+          return Scaffold(
+            backgroundColor: theme.backgroundColor,
+            appBar: AppBarWidget(
+              title: 'Мы начинаем',
+              currentStep: state.currentQuiz,
+              isStart: isStart,
+            ),
+            body: ListView(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: padding),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 20.0),
+                        child: Text(
+                          quiz!.question ?? '',
+                          style: theme.textTheme.headline1
+                              ?.copyWith(color: theme.cardColor, fontSize: 25),
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      // width: width,
-                      height: height - 250,
-                      child: ListView.builder(
+                      SizedBox(
+                        // width: width,
+                        height: state.answers.length * 120,
+                        child: ListView.builder(
+                          physics: const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
                           itemCount: state.answers.length,
                           itemBuilder: (context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.only(bottom: 20),
-                              child: Container(
-                                width: width,
-                                height: 100,
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: padding),
-                                decoration: BoxDecoration(
-                                  color: theme.cardColor,
-                                  borderRadius: BorderRadius.circular(25.0),
-                                ),
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      width: 40,
-                                      height: 40,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius:
-                                            BorderRadius.circular(15.0),
-                                      ),
-                                      child: Center(child: Text('${index + 1}', style: theme.textTheme.headline6?.copyWith(color: theme.backgroundColor),)),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 20),
-                                      child: Expanded(
-                                        child: Text(
-                                          state.answers[index].answers ?? 'пусто',
-                                          maxLines: 4,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: theme.textTheme.headline5
-                                              ?.copyWith(
-                                                  color: theme.shadowColor,
-                                                  fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
+                            return QuizCard(
+                              index: index,
+                              answer: state.answers[index],
                             );
-                          }),
-                    )
-                  ],
+                          },
+                        ),
+                      )
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          ),
-        );
+              ],
+            ),
+          );
+        } else {
+          return const SplashScreen(
+            title: 'Теперь наши ученые проверят твои ответы',
+            image: AppImages.result,
+            navigator: 'result',
+          );
+        }
       },
     );
   }

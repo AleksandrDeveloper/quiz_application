@@ -118,24 +118,34 @@ class _FormContainerWelcomeState extends State<FormContainerWelcome> {
                   ),
                 ],
               ),
-              GestureDetector(
-                onTap: () => onSave(context),
-                child: Container(
-                  width: width,
-                  height: 60.0,
-                  decoration: BoxDecoration(
-                    color: theme.shadowColor,
-                    borderRadius: BorderRadius.circular(50.0),
-                  ),
-                  child: Center(
-                    child: Text(
-                      'Поехали',
-                      style: theme.textTheme.headline5
-                          ?.copyWith(color: Colors.white),
-                    ),
-                  ),
+              Container(
+                width: width,
+                height: 60.0,
+                decoration: BoxDecoration(
+                  color: theme.shadowColor,
+                  borderRadius: BorderRadius.circular(50.0),
                 ),
-              )
+                child: Stack(
+                  children: [
+                    Center(
+                      child: Text(
+                        'Поехали',
+                        style: theme.textTheme.headline5
+                            ?.copyWith(color: Colors.white),
+                      ),
+                    ),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(50.0),
+                      child: Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                          onTap: () => onSave(context),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         );
@@ -164,6 +174,8 @@ class _FormContainerWelcomeState extends State<FormContainerWelcome> {
     final categoryName = _categoryController.dropDownValue?.name;
     final difficultyName = _difficultyController.dropDownValue?.name;
     blocWelcome.add(SaveEvent(
-        categoryName: categoryName ?? '', difficultyName: difficultyName ?? '', context: context));
+        categoryName: categoryName ?? '',
+        difficultyName: difficultyName ?? '',
+        context: context));
   }
 }

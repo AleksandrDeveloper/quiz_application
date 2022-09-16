@@ -4,7 +4,13 @@ import 'package:flutter/material.dart';
 import '../../configs/configs.dart';
 
 class SplashScreen extends StatefulWidget {
+  final String image;
+  final String title;
+  final String navigator;
   const SplashScreen({
+    required this.title,
+    required this.image,
+    required this.navigator,
     Key? key,
   }) : super(key: key);
 
@@ -15,7 +21,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     Future.delayed(const Duration(seconds: 3), () {
-      Navigator.of(context).pushNamed('quiz');
+      Navigator.of(context).pushNamed(widget.navigator);
     });
     super.initState();
   }
@@ -30,14 +36,14 @@ class _SplashScreenState extends State<SplashScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           FadeInDown(
-            child: const Image(
-              image: AssetImage(AppImages.start),
+            child:   Image(
+              image: AssetImage(widget.image),
               fit: BoxFit.cover,
             ),
           ),
           FadeInUp(
             child: Text(
-              'Самое время приготовиться, удачи!',
+              widget.title,
               textAlign: TextAlign.center,
               style: theme.textTheme.headline1
                   ?.copyWith(color: Colors.white, fontSize: 40),
