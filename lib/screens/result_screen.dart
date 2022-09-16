@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quiz_application/bloc/result_bloc/result_bloc.dart';
 import 'package:quiz_application/bloc/welcome/welcome_bloc.dart';
-import '../modals/modals.dart';
+import 'package:quiz_application/modals/result_user_modal.dart';
 import '../widgets/widgets.dart';
 
 class ResultScreen extends StatelessWidget {
@@ -37,31 +37,7 @@ class ResultScreen extends StatelessWidget {
                           itemCount: listResult.length,
                           itemBuilder: (context, index) {
                             final result = listResult[index];
-                            return Padding(
-                              padding: const EdgeInsets.only(bottom: 20),
-                              child: Container(
-                                padding: const EdgeInsets.all(padding),
-                                width: width,
-                                height: 120,
-                                decoration: BoxDecoration(
-                                  color: result.isTrue
-                                      ? theme.hintColor
-                                      : theme.errorColor,
-                                  borderRadius: BorderRadius.circular(25.0),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    result.nameQuestion,
-                                    textAlign: TextAlign.center,
-                                    style: theme.textTheme.headline6?.copyWith(
-                                        fontSize: 17,
-                                        color: result.isTrue
-                                            ? Colors.black
-                                            : Colors.white),
-                                  ),
-                                ),
-                              ),
-                            );
+                            return ResultCard(result: result);
                           }),
                     ),
                     Container(
@@ -106,3 +82,5 @@ class ResultScreen extends StatelessWidget {
     );
   }
 }
+
+

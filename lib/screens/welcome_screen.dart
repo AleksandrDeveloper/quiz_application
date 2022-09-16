@@ -36,6 +36,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     padding: const EdgeInsets.symmetric(horizontal: padding),
                     child: Column(
                       children: [
+                        ElevatedButton(onPressed: (){
+                          final modal = ApiClient();
+                          modal.postResult();
+                        }, child: Text('test')),
                         Image(
                           image: const AssetImage(
                             AppImages.welcome,

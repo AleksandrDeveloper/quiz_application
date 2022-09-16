@@ -3,10 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quiz_application/bloc/quiz_bloc/quiz_bloc.dart';
 import 'package:quiz_application/bloc/result_bloc/result_bloc.dart';
 import 'package:quiz_application/bloc/welcome/welcome_bloc.dart';
-
 import 'configs/configs.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 

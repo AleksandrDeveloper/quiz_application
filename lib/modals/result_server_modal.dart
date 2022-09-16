@@ -3,8 +3,7 @@ import 'package:equatable/equatable.dart';
 class ResultServer extends Equatable {
   final int? id;
   final DateTime dataQuiz;
-  final DateTime timeStart;
-  final DateTime? timeEnd;
+  final DateTime? durationQuiz;
   final String category;
   final String difficulty;
   final int? rightAnswer;
@@ -17,8 +16,7 @@ class ResultServer extends Equatable {
     required this.difficulty,
     this.notRightAnswer,
     this.rightAnswer,
-    this.timeEnd,
-    required this.timeStart,
+    this.durationQuiz,
   });
 
   @override
@@ -29,7 +27,6 @@ class ResultServer extends Equatable {
         difficulty,
         notRightAnswer,
         rightAnswer,
-        timeEnd,
-        timeStart,
+        durationQuiz,
       ];
 }
