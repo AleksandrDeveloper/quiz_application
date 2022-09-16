@@ -1,8 +1,6 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 
-import '../../configs/configs.dart';
-
 class SplashScreen extends StatefulWidget {
   final String image;
   final String title;
@@ -29,27 +27,31 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    const padding = 16.0;
 
     return Scaffold(
       backgroundColor: theme.backgroundColor,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          FadeInDown(
-            child:   Image(
-              image: AssetImage(widget.image),
-              fit: BoxFit.cover,
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: padding),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            FadeInDown(
+              child: Image(
+                image: AssetImage(widget.image),
+                fit: BoxFit.cover,
+              ),
             ),
-          ),
-          FadeInUp(
-            child: Text(
-              widget.title,
-              textAlign: TextAlign.center,
-              style: theme.textTheme.headline1
-                  ?.copyWith(color: Colors.white, fontSize: 40),
-            ),
-          )
-        ],
+            FadeInUp(
+              child: Text(
+                widget.title,
+                textAlign: TextAlign.center,
+                style: theme.textTheme.headline1
+                    ?.copyWith(color: Colors.white, fontSize: 35),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

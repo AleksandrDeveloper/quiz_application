@@ -14,6 +14,7 @@ part 'welcome_state.dart';
 class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
   WelcomeBloc() : super(const WelcomeState()) {
     on(_onSave);
+    on(_onStart);
   }
   Future<void> _onSave(
     SaveEvent event,
@@ -47,5 +48,12 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
       ));
       emit(state.copyWith(processState: ProcessState.fine));
     }
+  }
+
+  Future<void> _onStart(
+      OnStartEvent event,
+      Emitter<WelcomeState> emit,
+      ) async {
+    emit(state.copyWith(processState: ProcessState.none));
   }
 }

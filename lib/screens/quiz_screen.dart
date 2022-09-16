@@ -67,6 +67,7 @@ class _QuizScreenState extends State<QuizScreen> {
                             return QuizCard(
                               index: index,
                               answer: state.answers[index],
+                                quiz: quiz,
                             );
                           },
                         ),

@@ -87,6 +87,7 @@ class _FormContainerWelcomeState extends State<FormContainerWelcome> {
                     dropDownItemCount: 6,
                     dropDownList: dropdownCategory,
                     textFieldDecoration: InputDecoration(
+
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(50),
                         borderSide: BorderSide(
@@ -94,8 +95,7 @@ class _FormContainerWelcomeState extends State<FormContainerWelcome> {
                           color: Theme.of(context).backgroundColor,
                         ),
                       ),
-                      focusColor: Colors.red,
-                      hoverColor: Colors.green,
+                      labelStyle: theme.textTheme.bodyText1,
                       labelText: 'Тематика',
                     ),
                   ),
@@ -110,8 +110,7 @@ class _FormContainerWelcomeState extends State<FormContainerWelcome> {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(50),
                         ),
-                        focusColor: Colors.red,
-                        hoverColor: Colors.green,
+                        labelStyle: theme.textTheme.bodyText1,
                         labelText: 'Уровень сложности',
                       ),
                     ),

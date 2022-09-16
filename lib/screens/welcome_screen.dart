@@ -5,7 +5,6 @@ import 'package:quiz_application/bloc/welcome/welcome_bloc.dart';
 import '../configs/configs.dart';
 import '../modals/modals.dart';
 import '../widgets/widgets.dart';
-import 'screens.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -15,8 +14,6 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
-
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -34,19 +31,21 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   currentStep: 1,
                 ),
                 backgroundColor: theme.backgroundColor,
-                body: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: padding),
-                  child: Column(
-                    children: [
-                      Image(
-                        image: const AssetImage(
-                          AppImages.welcome,
+                body: FadeInUp(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: padding),
+                    child: Column(
+                      children: [
+                        Image(
+                          image: const AssetImage(
+                            AppImages.welcome,
+                          ),
+                          fit: BoxFit.cover,
+                          width: width,
                         ),
-                        fit: BoxFit.cover,
-                        width: width,
-                      ),
-                      const FormContainerWelcome()
-                    ],
+                        const FormContainerWelcome()
+                      ],
+                    ),
                   ),
                 ))
             : state.processState == ProcessState.fine

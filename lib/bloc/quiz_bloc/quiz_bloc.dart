@@ -3,6 +3,9 @@ import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quiz_application/bloc/result_bloc/result_bloc.dart';
 import 'package:quiz_application/modals/answers_modal.dart';
 
 import '../../configs/configs.dart';
@@ -15,12 +18,13 @@ class QuizBloc extends Bloc<QuizEvent, QuizState> {
   QuizBloc() : super(const QuizState()) {
     on(_fetchQuiz);
     on(_nextQuiz);
-    on(_postQuiz);
+
   }
   final apiClient = ApiClient();
   var currentQuiz = 1;
   List<Quiz> listQuiz = [];
   List<AnswersModal> listAnswers = [];
+
 
   Future<void> _fetchQuiz(
     FetchQuizEvent event,
@@ -53,13 +57,10 @@ class QuizBloc extends Bloc<QuizEvent, QuizState> {
     listAnswers.removeWhere((element) => element.answers == null);
     emit(state.copyWith(
         quiz: quiz, currentQuiz: currentQuiz, answers: listAnswers));
-    if(currentQuiz >= 10){
+    if (currentQuiz == 10) {
       emit(state.copyWith(isFinish: true));
     }
   }
 
-  Future<void> _postQuiz(
-    PostQuizEvent event,
-    Emitter<QuizState> emit,
-  ) async {}
+
 }

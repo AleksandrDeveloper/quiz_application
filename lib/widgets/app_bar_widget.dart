@@ -26,7 +26,7 @@ class AppBarWidget extends StatelessWidget with PreferredSizeWidget {
         child: AnimatedContainer(
           duration: duration,
           width: width,
-          height: isStart! ? height - 30 : height,
+          height: isStart ? height - 30 : height,
           padding: const EdgeInsets.symmetric(horizontal: padding),
           decoration: BoxDecoration(
             color: theme.cardColor,

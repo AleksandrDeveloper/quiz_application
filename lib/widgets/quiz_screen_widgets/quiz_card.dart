@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quiz_application/bloc/quiz_bloc/quiz_bloc.dart';
+import 'package:quiz_application/bloc/result_bloc/result_bloc.dart';
 
 import '../../modals/modals.dart';
 
 class QuizCard extends StatelessWidget {
   final int index;
   final AnswersModal answer;
+  final Quiz quiz;
   const QuizCard({
     Key? key,
     required this.index,
     required this.answer,
+    required this.quiz,
   }) : super(key: key);
 
   @override
@@ -74,8 +77,15 @@ class QuizCard extends StatelessWidget {
                 color: Colors.transparent,
                 child: InkWell(
                   onTap: () {
-                   final bloc = context.read<QuizBloc>();
-                   bloc.add(NextQuizEvent());
+                    final blocQuiz = context.read<QuizBloc>();
+                    final blocResult = context.read<ResultBloc>();
+
+                    blocQuiz.add(NextQuizEvent());
+                    blocResult.add(ResultUserEvent(
+                      quiz: quiz,
+                      context: context,
+                      currentAnswer: answer,
+                    ));
                   },
                 ),
               ),

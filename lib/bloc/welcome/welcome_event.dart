@@ -22,3 +22,8 @@ class SaveEvent extends WelcomeEvent {
         context,
       ];
 }
+
+class OnStartEvent extends WelcomeEvent {
+  @override
+  List<Object?> get props => [];
+}

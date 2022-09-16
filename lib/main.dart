@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quiz_application/bloc/quiz_bloc/quiz_bloc.dart';
+import 'package:quiz_application/bloc/result_bloc/result_bloc.dart';
 import 'package:quiz_application/bloc/welcome/welcome_bloc.dart';
 
 import 'configs/configs.dart';
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => WelcomeBloc()),
         BlocProvider(create: (context) => QuizBloc()),
+        BlocProvider(create: (context) => ResultBloc()),
       ],
       child: MaterialApp(
         title: 'Quiz Application',

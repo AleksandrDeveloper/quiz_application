@@ -23,7 +23,4 @@ class NextQuizEvent extends QuizEvent {
   List<Object?> get props => throw UnimplementedError();
 }
 
-class PostQuizEvent extends QuizEvent {
-  @override
-  List<Object?> get props => throw UnimplementedError();
-}
+

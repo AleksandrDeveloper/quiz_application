@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-class Result extends Equatable {
+class ResultServer extends Equatable {
   final int? id;
   final DateTime dataQuiz;
   final DateTime timeStart;
@@ -10,7 +10,7 @@ class Result extends Equatable {
   final int? rightAnswer;
   final int? notRightAnswer;
 
-  const Result({
+  const ResultServer({
     this.id,
     required this.category,
     required this.dataQuiz,
