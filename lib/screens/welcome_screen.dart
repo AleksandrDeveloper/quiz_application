@@ -50,7 +50,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   ),
                 ))
             : state.processState == ProcessState.fine
-                ? const NextWidget()
+                ? const SplashScreen()
                 : Container();
       },
     );

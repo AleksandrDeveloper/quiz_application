@@ -1,6 +1,7 @@
 import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quiz_application/bloc/quiz_bloc/quiz_bloc.dart';
 import 'package:quiz_application/bloc/welcome/welcome_bloc.dart';
 
 import '../../modals/modals.dart';
@@ -159,10 +160,11 @@ class _FormContainerWelcomeState extends State<FormContainerWelcome> {
   ];
 
   void onSave(BuildContext context) {
-    final bloc = context.read<WelcomeBloc>();
-    final category = _categoryController.dropDownValue?.name;
-    final difficulty = _difficultyController.dropDownValue?.name;
-    bloc.add(SaveEvent(
-        categoryName: category ?? '', difficultyName: difficulty ?? ''));
+    final blocWelcome = context.read<WelcomeBloc>();
+
+    final categoryName = _categoryController.dropDownValue?.name;
+    final difficultyName = _difficultyController.dropDownValue?.name;
+    blocWelcome.add(SaveEvent(
+        categoryName: categoryName ?? '', difficultyName: difficultyName ?? '', context: context));
   }
 }

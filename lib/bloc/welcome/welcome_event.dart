@@ -7,15 +7,18 @@ abstract class WelcomeEvent extends Equatable {
 class SaveEvent extends WelcomeEvent {
   final String categoryName;
   final String difficultyName;
+  final BuildContext context;
 
   const SaveEvent({
     required this.categoryName,
     required this.difficultyName,
+    required this.context,
   });
 
   @override
   List<Object?> get props => [
         categoryName,
         difficultyName,
+        context,
       ];
 }

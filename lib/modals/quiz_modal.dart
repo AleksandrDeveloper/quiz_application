@@ -1,25 +1,25 @@
 class Quiz {
   Quiz({
     required this.id,
-    required this.question,
+    this.question,
     this.description,
     required this.answers,
     required this.multipleCorrectAnswers,
     required this.correctAnswers,
-    required this.correctAnswer,
-    required this.category,
-    required this.difficulty,
+    this.correctAnswer,
+    this.category,
+    this.difficulty,
   });
 
   final int id;
-  final String question;
+  final String? question;
   final String? description;
   final Answers answers;
   final String multipleCorrectAnswers;
   final CorrectAnswers correctAnswers;
-  final String correctAnswer;
-  final String category;
-  final String difficulty;
+  final String? correctAnswer;
+  final String? category;
+  final String? difficulty;
 
   factory Quiz.fromJson(Map<String, dynamic> json) => Quiz(
         id: json["id"],

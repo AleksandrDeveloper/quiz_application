@@ -2,6 +2,9 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quiz_application/bloc/quiz_bloc/quiz_bloc.dart';
 
 import '../../modals/modals.dart';
 
@@ -18,6 +21,7 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
   ) async {
     final categoryName = event.categoryName;
     final difficultyName = event.difficultyName;
+    final blocQuiz = event.context.read<QuizBloc>();
     if (categoryName.isEmpty && difficultyName.isEmpty) {
       emit(state.copyWith(
           processState: ProcessState.error,
@@ -37,6 +41,10 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
       return;
     }
     if (categoryName.isNotEmpty && difficultyName.isNotEmpty) {
+      blocQuiz.add(FetchQuizEvent(
+        categoryName: categoryName,
+        difficultyName: difficultyName,
+      ));
       emit(state.copyWith(processState: ProcessState.fine));
     }
   }
