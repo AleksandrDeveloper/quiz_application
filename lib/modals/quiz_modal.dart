@@ -48,7 +48,7 @@ class Quiz {
 
 class Answers {
   Answers({
-    required this.answerA,
+    this.answerA,
     this.answerB,
     this.answerC,
     this.answerD,
@@ -56,7 +56,7 @@ class Answers {
     this.answerF,
   });
 
-  final String answerA;
+  final String? answerA;
   final String? answerB;
   final String? answerC;
   final String? answerD;

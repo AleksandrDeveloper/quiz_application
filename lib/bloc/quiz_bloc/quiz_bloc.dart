@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:quiz_application/modals/answers_modal.dart';
 
 import '../../configs/configs.dart';
 import '../../modals/modals.dart';
@@ -18,7 +20,7 @@ class QuizBloc extends Bloc<QuizEvent, QuizState> {
   final apiClient = ApiClient();
   var currentQuiz = 1;
   List<Quiz> listQuiz = [];
-
+  List<AnswersModal> listAnswers = [];
 
   Future<void> _fetchQuiz(
     FetchQuizEvent event,
@@ -30,8 +32,12 @@ class QuizBloc extends Bloc<QuizEvent, QuizState> {
         category: categoryName, difficulty: difficultyName);
     listQuiz.addAll(listQuizJson);
     final quiz = listQuiz[currentQuiz];
-    print('это первый вопрос  ${quiz.question}');
-    emit(state.copyWith(quiz: quiz, currentQuiz: currentQuiz));
+    final mapAnswers = quiz.answers.toJson();
+    mapAnswers
+        .forEach((k, v) => listAnswers.add(AnswersModal(name: k, answers: v)));
+    listAnswers.removeWhere((element) => element.answers == null);
+    emit(state.copyWith(
+        quiz: quiz, currentQuiz: currentQuiz, answers: listAnswers));
   }
 
   Future<void> _nextQuiz(
@@ -41,7 +47,12 @@ class QuizBloc extends Bloc<QuizEvent, QuizState> {
     currentQuiz + 1;
     print(currentQuiz);
     final quiz = listQuiz[currentQuiz];
-    emit(state.copyWith(quiz: quiz, currentQuiz: currentQuiz));
+    listAnswers.clear();
+    final mapAnswers = quiz.answers.toJson();
+    mapAnswers
+        .forEach((k, v) => listAnswers.add(AnswersModal(name: k, answers: v)));
+    emit(state.copyWith(
+        quiz: quiz, currentQuiz: currentQuiz, answers: listAnswers));
   }
 
   Future<void> _postQuiz(

@@ -27,6 +27,8 @@ class _QuizScreenState extends State<QuizScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     const padding = 16.0;
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
 
     return BlocBuilder<QuizBloc, QuizState>(
       builder: (context, state) {
@@ -38,22 +40,73 @@ class _QuizScreenState extends State<QuizScreen> {
             currentStep: state.currentQuiz,
             isStart: isStart,
           ),
-          body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: padding),
-            child: Column(
-              children: [
-                Text(
-                  quiz!.question ?? '',
-                  style:
-                      theme.textTheme.headline1?.copyWith(color: theme.cardColor, fontSize: 35),
+          body: ListView(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: padding),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 20.0),
+                      child: Text(
+                        quiz!.question ?? '',
+                        style: theme.textTheme.headline1
+                            ?.copyWith(color: theme.cardColor, fontSize: 35),
+                      ),
+                    ),
+                    SizedBox(
+                      // width: width,
+                      height: height - 250,
+                      child: ListView.builder(
+                          itemCount: state.answers.length,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.only(bottom: 20),
+                              child: Container(
+                                width: width,
+                                height: 100,
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: padding),
+                                decoration: BoxDecoration(
+                                  color: theme.cardColor,
+                                  borderRadius: BorderRadius.circular(25.0),
+                                ),
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      width: 40,
+                                      height: 40,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius:
+                                            BorderRadius.circular(15.0),
+                                      ),
+                                      child: Center(child: Text('${index + 1}', style: theme.textTheme.headline6?.copyWith(color: theme.backgroundColor),)),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 20),
+                                      child: Expanded(
+                                        child: Text(
+                                          state.answers[index].answers ?? 'пусто',
+                                          maxLines: 4,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: theme.textTheme.headline5
+                                              ?.copyWith(
+                                                  color: theme.shadowColor,
+                                                  fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            );
+                          }),
+                    )
+                  ],
                 ),
-                // ListView.builder(
-                //     itemCount: quiz.answers,
-                //     itemBuilder: (context, index){
-                //   return
-                // })
-              ],
-            ),
+              ),
+            ],
           ),
         );
       },
