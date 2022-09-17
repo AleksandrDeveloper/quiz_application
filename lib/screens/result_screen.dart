@@ -63,7 +63,7 @@ class ResultScreen extends StatelessWidget {
                               child: InkWell(
                                 onTap: () {
                                   final bloc = context.read<WelcomeBloc>();
-                                  bloc.add(OnStartEvent());
+                                  bloc.add(OnNewStartEvent());
                                   Navigator.of(context).pushNamed('welcome');
                                 },
                               ),

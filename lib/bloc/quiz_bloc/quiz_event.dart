@@ -5,11 +5,14 @@ abstract class QuizEvent extends Equatable {
 }
 
 class FetchQuizEvent extends QuizEvent {
+  final BuildContext context;
   final String categoryName;
   final String difficultyName;
   const FetchQuizEvent({
+     required this.context,
     required this.categoryName,
     required this.difficultyName,
+
   });
   @override
   List<Object?> get props => [

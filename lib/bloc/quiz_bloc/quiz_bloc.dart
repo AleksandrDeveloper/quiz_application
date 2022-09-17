@@ -18,7 +18,6 @@ class QuizBloc extends Bloc<QuizEvent, QuizState> {
   QuizBloc() : super(const QuizState()) {
     on(_fetchQuiz);
     on(_nextQuiz);
-
   }
   final apiClient = ApiClient();
   var currentQuiz = 1;
@@ -30,6 +29,7 @@ class QuizBloc extends Bloc<QuizEvent, QuizState> {
     FetchQuizEvent event,
     Emitter<QuizState> emit,
   ) async {
+    final blocResult = event.context.read<ResultBloc>();
     final categoryName = event.categoryName;
     final difficultyName = event.difficultyName;
     final listQuizJson = await apiClient.fetchQuiz(
@@ -40,6 +40,11 @@ class QuizBloc extends Bloc<QuizEvent, QuizState> {
     mapAnswers
         .forEach((k, v) => listAnswers.add(AnswersModal(name: k, answers: v)));
     listAnswers.removeWhere((element) => element.answers == null);
+    final resultServer = ResultServer(
+        category: categoryName,
+        difficulty: difficultyName,
+        dataQuiz: DateTime.now());
+    blocResult.add(PostResultEvent(resultServer: resultServer));
     emit(state.copyWith(
         quiz: quiz, currentQuiz: currentQuiz, answers: listAnswers));
   }
@@ -59,8 +64,7 @@ class QuizBloc extends Bloc<QuizEvent, QuizState> {
         quiz: quiz, currentQuiz: currentQuiz, answers: listAnswers));
     if (currentQuiz == 10) {
       emit(state.copyWith(isFinish: true));
+
     }
   }
-
-
 }
