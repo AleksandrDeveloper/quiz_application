@@ -51,7 +51,7 @@ class ResultScreen extends StatelessWidget {
                         children: [
                           Center(
                             child: Text(
-                              'Поехали',
+                              'Повторить',
                               style: theme.textTheme.headline5
                                   ?.copyWith(color: theme.shadowColor),
                             ),

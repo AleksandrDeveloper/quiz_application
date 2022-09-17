@@ -34,12 +34,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 body: FadeInUp(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: padding),
-                    child: Column(
+                    child: ListView(
                       children: [
-                        ElevatedButton(onPressed: (){
-                          final modal = ApiClient();
-                          modal.postResult();
-                        }, child: Text('test')),
                         Image(
                           image: const AssetImage(
                             AppImages.welcome,
