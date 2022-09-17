@@ -17,6 +17,33 @@ class ResultServer extends Equatable {
     this.durationQuiz,
   });
 
+  ResultServer copyWith({
+    DateTime? dataQuiz,
+    double? durationQuiz,
+    String? category,
+    String? difficulty,
+    int? rightAnswer,
+    int? notRightAnswer,
+  }) {
+    return ResultServer(
+      dataQuiz: dataQuiz ?? this.dataQuiz,
+      durationQuiz: durationQuiz ?? this.durationQuiz,
+      category: category ?? this.category,
+      difficulty: difficulty ?? this.difficulty,
+      rightAnswer: rightAnswer ?? this.rightAnswer,
+      notRightAnswer: notRightAnswer ?? this.notRightAnswer,
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        "dataQuiz": dataQuiz,
+        "durationQuiz": durationQuiz,
+        "category": category,
+        "difficulty": difficulty,
+        "rightAnswer": rightAnswer,
+        "notRightAnswer": notRightAnswer,
+      };
+
   @override
   List<Object?> get props => [
         category,

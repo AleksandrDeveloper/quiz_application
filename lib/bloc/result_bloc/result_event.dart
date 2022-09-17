@@ -22,9 +22,9 @@ class ResultUserEvent extends ResultEvent {
 }
 
 class PostResultEvent extends ResultEvent {
-  final ResultServer resultServer;
+  final ResultServer? resultServer;
   const PostResultEvent({
-    required this.resultServer,
+     this.resultServer,
   });
   @override
   List<Object?> get props => [
