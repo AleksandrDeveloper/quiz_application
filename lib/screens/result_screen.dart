@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quiz_application/bloc/quiz_bloc/quiz_bloc.dart';
 import 'package:quiz_application/bloc/result_bloc/result_bloc.dart';
 import 'package:quiz_application/bloc/welcome/welcome_bloc.dart';
-import 'package:quiz_application/modals/result_user_modal.dart';
+import '../uikit/uikit.dart';
 import '../widgets/widgets.dart';
 
 class ResultScreen extends StatelessWidget {
@@ -11,7 +12,6 @@ class ResultScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final width = MediaQuery.of(context).size.width;
     const padding = 16.0;
 
     return BlocBuilder<ResultBloc, ResultState>(
@@ -19,7 +19,7 @@ class ResultScreen extends StatelessWidget {
         final listResult = state.listResult;
         return Scaffold(
           backgroundColor: theme.backgroundColor,
-          appBar: const AppBarWidget(
+          appBar: const QuizAppBar(
             title: 'Quiz Result',
             isStart: false,
           ),
@@ -32,45 +32,26 @@ class ResultScreen extends StatelessWidget {
                     SizedBox(
                       height: listResult.length * 140,
                       child: ListView.builder(
-                          physics: const NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          itemCount: listResult.length,
-                          itemBuilder: (context, index) {
-                            final result = listResult[index];
-                            return ResultCard(result: result);
-                          }),
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: listResult.length,
+                        itemBuilder: (context, index) {
+                          final result = listResult[index];
+                          return ResultCard(result: result);
+                        },
+                      ),
                     ),
-                    Container(
-                      width: width,
-                      height: 60.0,
-                      decoration: BoxDecoration(
-                        color: theme.cardColor,
-                        borderRadius: BorderRadius.circular(50.0),
-                      ),
-                      child: Stack(
-                        children: [
-                          Center(
-                            child: Text(
-                              'Повторить',
-                              style: theme.textTheme.headline5
-                                  ?.copyWith(color: theme.shadowColor),
-                            ),
-                          ),
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(50.0),
-                            child: Material(
-                              color: Colors.transparent,
-                              child: InkWell(
-                                onTap: () {
-                                  final bloc = context.read<WelcomeBloc>();
-                                  bloc.add(OnNewStartEvent());
-                                  Navigator.of(context).pushNamed('welcome');
-                                },
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                    QuizAppButton(
+                      onTap: () {
+                        final blocWelcome = context.read<WelcomeBloc>();
+                        final blocQuiz = context.read<QuizBloc>();
+                        blocWelcome.add(OnNewStartEvent());
+                        blocQuiz.add(NewStartEvent());
+                        Navigator.of(context).pushNamed('welcome');
+                      },
+                      colorText: AppColor.primary,
+                      colorButton: AppColor.white,
+                      title: 'Повторить',
                     ),
                   ],
                 ),
@@ -82,5 +63,3 @@ class ResultScreen extends StatelessWidget {
     );
   }
 }
-
-

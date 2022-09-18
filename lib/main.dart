@@ -6,6 +6,8 @@ import 'package:quiz_application/bloc/welcome/welcome_bloc.dart';
 import 'configs/configs.dart';
 import 'package:firebase_core/firebase_core.dart';
 
+import 'uikit/uikit.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();

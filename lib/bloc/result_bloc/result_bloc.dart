@@ -52,18 +52,18 @@ class ResultBloc extends Bloc<ResultEvent, ResultState> {
     PostResultEvent event,
     Emitter<ResultState> emit,
   ) async {
-    var resultServer = event.resultServer;
-    final dataStartQuiz = resultServer?.dataQuiz.minute.toDouble();
-    final dataEndQuiz = DateTime.now().minute.toDouble();
-    if (currentQuiz == 10) {
-      final resultDurationQuiz = dataStartQuiz! - dataEndQuiz;
-      resultServer?.copyWith(
-        durationQuiz: resultDurationQuiz,
-        rightAnswer: correctAnswerResult,
-        notRightAnswer: notCorrectAnswerResult,
-      );
+    final resultServer = event.resultServer;
+    final dataStartQuiz = resultServer.dataQuiz;
+    final dataEndQuiz = DateTime.now();
 
-      await apiClient.postResult(result: resultServer!);
-    }
+    final resultDurationQuiz = dataEndQuiz.difference(dataStartQuiz).inSeconds;
+
+    final updateResult = resultServer.copyWith(
+      durationQuiz: resultDurationQuiz,
+      rightAnswer: correctAnswerResult,
+      notRightAnswer: notCorrectAnswerResult,
+    );
+
+    await apiClient.postResult(result: updateResult);
   }
 }

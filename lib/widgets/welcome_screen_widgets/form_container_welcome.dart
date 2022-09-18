@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quiz_application/bloc/welcome/welcome_bloc.dart';
 
 import '../../modals/modals.dart';
+import '../../uikit/uikit.dart';
 
 class FormContainerWelcome extends StatefulWidget {
   const FormContainerWelcome({
@@ -81,69 +82,27 @@ class _FormContainerWelcomeState extends State<FormContainerWelcome> {
               ),
               Column(
                 children: [
-                  DropDownTextField(
-                    singleController: _categoryController,
-                    clearOption: false,
-                    dropDownItemCount: 6,
-                    dropDownList: dropdownCategory,
-                    textFieldDecoration: InputDecoration(
-
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(50),
-                        borderSide: BorderSide(
-                          width: 3,
-                          color: Theme.of(context).backgroundColor,
-                        ),
-                      ),
-                      labelStyle: theme.textTheme.bodyText1,
-                      labelText: 'Тематика',
-                    ),
+                  QuizAppTextFieldDropdown(
+                    controller: _categoryController,
+                    listValue: dropdownCategory,
+                    title: 'Тематика',
+                    listValueLength: 6,
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 20.0),
-                    child: DropDownTextField(
-                      singleController: _difficultyController,
-                      clearOption: false,
-                      dropDownItemCount: 3,
-                      dropDownList: difficultyCategory,
-                      textFieldDecoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(50),
-                        ),
-                        labelStyle: theme.textTheme.bodyText1,
-                        labelText: 'Уровень сложности',
-                      ),
-                    ),
-                  ),
+                      padding: const EdgeInsets.only(top: 20.0),
+                      child: QuizAppTextFieldDropdown(
+                        controller: _difficultyController,
+                        listValue: dropdownDifficulty,
+                        title: 'Уровень сложности',
+                        listValueLength: 3,
+                      )),
                 ],
               ),
-              Container(
-                width: width,
-                height: 60.0,
-                decoration: BoxDecoration(
-                  color: theme.shadowColor,
-                  borderRadius: BorderRadius.circular(50.0),
-                ),
-                child: Stack(
-                  children: [
-                    Center(
-                      child: Text(
-                        'Поехали',
-                        style: theme.textTheme.headline5
-                            ?.copyWith(color: Colors.white),
-                      ),
-                    ),
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(50.0),
-                      child: Material(
-                        color: Colors.transparent,
-                        child: InkWell(
-                          onTap: () => onSave(context),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+              QuizAppButton(
+                onTap: () => onSave(context),
+                colorText: Colors.white,
+                colorButton: theme.shadowColor,
+                title: 'Поехали',
               ),
             ],
           ),
@@ -161,7 +120,7 @@ class _FormContainerWelcomeState extends State<FormContainerWelcome> {
     const DropDownValueModel(name: 'Docker', value: "value6"),
   ];
 
-  final difficultyCategory = [
+  final dropdownDifficulty = [
     const DropDownValueModel(name: 'Easy', value: "value1"),
     const DropDownValueModel(name: 'Medium', value: "value2"),
     const DropDownValueModel(name: 'Hard', value: "value3"),
@@ -176,5 +135,44 @@ class _FormContainerWelcomeState extends State<FormContainerWelcome> {
         categoryName: categoryName ?? '',
         difficultyName: difficultyName ?? '',
         context: context));
+  }
+}
+
+class QuizAppTextFieldDropdown extends StatelessWidget {
+  final String? title;
+  final SingleValueDropDownController controller;
+  final List<DropDownValueModel>? listValue;
+  final int? listValueLength;
+
+  const QuizAppTextFieldDropdown({
+    Key? key,
+    this.title,
+    this.listValueLength,
+    required SingleValueDropDownController controller,
+    required this.listValue,
+  })  : controller = controller,
+        super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    return DropDownTextField(
+      singleController: controller,
+      clearOption: false,
+      dropDownItemCount: listValueLength ?? 1,
+      dropDownList: listValue ?? [],
+      textFieldDecoration: InputDecoration(
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(50),
+          borderSide: BorderSide(
+            width: 3,
+            color: AppColor.background,
+          ),
+        ),
+        labelStyle: theme.textTheme.bodyText1,
+        labelText: title,
+      ),
+    );
   }
 }

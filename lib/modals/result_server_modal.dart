@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 
 class ResultServer extends Equatable {
   final DateTime dataQuiz;
-  final double? durationQuiz;
+  final int? durationQuiz;
   final String category;
   final String difficulty;
   final int? rightAnswer;
@@ -19,7 +19,7 @@ class ResultServer extends Equatable {
 
   ResultServer copyWith({
     DateTime? dataQuiz,
-    double? durationQuiz,
+    int? durationQuiz,
     String? category,
     String? difficulty,
     int? rightAnswer,

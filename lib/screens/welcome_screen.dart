@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quiz_application/bloc/welcome/welcome_bloc.dart';
 import '../configs/configs.dart';
 import '../modals/modals.dart';
+import '../uikit/uikit.dart';
 import '../widgets/widgets.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -16,7 +17,6 @@ class WelcomeScreen extends StatefulWidget {
 class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     final width = MediaQuery.of(context).size.width;
     const padding = 16.0;
 
@@ -25,12 +25,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         return state.processState == ProcessState.none ||
                 state.processState == ProcessState.error
             ? Scaffold(
-                appBar: const AppBarWidget(
+                appBar: const QuizAppBar(
                   title: 'Quiz Application',
                   isStart: false,
                   currentStep: 1,
                 ),
-                backgroundColor: theme.backgroundColor,
+                backgroundColor: AppColor.background,
                 body: FadeInUp(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: padding),
@@ -47,7 +47,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       ],
                     ),
                   ),
-                ))
+                ),
+              )
             : state.processState == ProcessState.fine
                 ? const SplashScreen(
                     title: 'Приготовься и УДАЧИ!',

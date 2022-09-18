@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_application/uikit/uikit.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 
-class AppBarWidget extends StatelessWidget with PreferredSizeWidget {
+class QuizAppBar extends StatelessWidget with PreferredSizeWidget {
   final String title;
   final bool isStart;
   final int? currentStep;
-  const AppBarWidget({
+  const QuizAppBar({
     required this.title,
     required this.isStart,
     this.currentStep,
@@ -29,11 +30,11 @@ class AppBarWidget extends StatelessWidget with PreferredSizeWidget {
           height: isStart ? height - 30 : height,
           padding: const EdgeInsets.symmetric(horizontal: padding),
           decoration: BoxDecoration(
-            color: theme.cardColor,
+            color: AppColor.white ,
             borderRadius: BorderRadius.circular(25.0),
             boxShadow: [
               BoxShadow(
-                color: theme.shadowColor,
+                color: AppColor.primary,
                 spreadRadius: 5,
                 blurRadius: 7,
                 offset: const Offset(0, 3),
@@ -44,8 +45,8 @@ class AppBarWidget extends StatelessWidget with PreferredSizeWidget {
               ? StepProgressIndicator(
                   totalSteps: 10,
                   currentStep: currentStep ?? 0,
-                  selectedColor: theme.backgroundColor,
-                  unselectedColor: theme.focusColor,
+                  selectedColor: AppColor.primary,
+                  unselectedColor: AppColor.grey,
                   roundedEdges: const Radius.circular(10),
                   size: 7,
                 )
@@ -55,7 +56,7 @@ class AppBarWidget extends StatelessWidget with PreferredSizeWidget {
                     Text(
                       title,
                       style: theme.textTheme.headline1?.copyWith(
-                        color: theme.shadowColor,
+                        color: AppColor.primary,
                       ),
                     ),
                   ],

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
 import '../../modals/modals.dart';
+import '../../uikit/uikit.dart';
 
 class ResultCard extends StatelessWidget {
   final ResultUser result;
@@ -22,7 +22,7 @@ class ResultCard extends StatelessWidget {
         width: width,
         height: 120,
         decoration: BoxDecoration(
-          color: result.isTrue ? theme.hintColor : theme.errorColor,
+          color: result.isTrue ? AppColor.green : AppColor.red,
           borderRadius: BorderRadius.circular(25.0),
         ),
         child: Center(
@@ -30,8 +30,9 @@ class ResultCard extends StatelessWidget {
             result.nameQuestion,
             textAlign: TextAlign.center,
             style: theme.textTheme.headline6?.copyWith(
-                fontSize: 17,
-                color: result.isTrue ? Colors.black : Colors.white),
+              fontSize: 17,
+              color: result.isTrue ? AppColor.black : AppColor.white,
+            ),
           ),
         ),
       ),

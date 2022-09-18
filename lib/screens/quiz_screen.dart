@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quiz_application/bloc/quiz_bloc/quiz_bloc.dart';
 import 'package:quiz_application/configs/configs.dart';
+import '../uikit/uikit.dart';
 import '../widgets/widgets.dart';
 
 class QuizScreen extends StatefulWidget {
   const QuizScreen({Key? key}) : super(key: key);
-
   @override
   State<QuizScreen> createState() => _QuizScreenState();
 }
@@ -27,17 +27,14 @@ class _QuizScreenState extends State<QuizScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     const padding = 16.0;
-    final width = MediaQuery.of(context).size.width;
-    final height = MediaQuery.of(context).size.height;
 
     return BlocBuilder<QuizBloc, QuizState>(
       builder: (context, state) {
         final quiz = state.quiz;
-        final listAnswers = state.answers;
         if (state.isFinish == false) {
           return Scaffold(
             backgroundColor: theme.backgroundColor,
-            appBar: AppBarWidget(
+            appBar: QuizAppBar(
               title: 'Мы начинаем',
               currentStep: state.currentQuiz,
               isStart: isStart,
@@ -53,7 +50,7 @@ class _QuizScreenState extends State<QuizScreen> {
                         child: Text(
                           quiz!.question ?? '',
                           style: theme.textTheme.headline1
-                              ?.copyWith(color: theme.cardColor, fontSize: 25),
+                              ?.copyWith(color: AppColor.white, fontSize: 25),
                         ),
                       ),
                       SizedBox(
@@ -67,7 +64,7 @@ class _QuizScreenState extends State<QuizScreen> {
                             return QuizCard(
                               index: index,
                               answer: state.answers[index],
-                                quiz: quiz,
+                              quiz: quiz,
                             );
                           },
                         ),

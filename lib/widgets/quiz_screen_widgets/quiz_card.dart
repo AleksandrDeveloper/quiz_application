@@ -4,6 +4,7 @@ import 'package:quiz_application/bloc/quiz_bloc/quiz_bloc.dart';
 import 'package:quiz_application/bloc/result_bloc/result_bloc.dart';
 
 import '../../modals/modals.dart';
+import '../../uikit/uikit.dart';
 
 class QuizCard extends StatelessWidget {
   final int index;
@@ -28,7 +29,7 @@ class QuizCard extends StatelessWidget {
         width: width,
         height: 100,
         decoration: BoxDecoration(
-          color: theme.cardColor,
+          color: AppColor.white,
           borderRadius: BorderRadius.circular(25.0),
         ),
         child: Stack(
@@ -42,14 +43,14 @@ class QuizCard extends StatelessWidget {
                       width: 40,
                       height: 40,
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: AppColor.grey,
                         borderRadius: BorderRadius.circular(15.0),
                       ),
                       child: Center(
                           child: Text(
                         '${index + 1}',
                         style: theme.textTheme.headline6
-                            ?.copyWith(color: theme.backgroundColor),
+                            ?.copyWith(color: AppColor.white),
                       )),
                     ),
                     Padding(
@@ -61,7 +62,8 @@ class QuizCard extends StatelessWidget {
                           maxLines: 3,
                           overflow: TextOverflow.ellipsis,
                           style: theme.textTheme.headline6?.copyWith(
-                            color: theme.shadowColor,
+                            color: AppColor.primary,
+                            fontSize: 18.0,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -80,7 +82,7 @@ class QuizCard extends StatelessWidget {
                     final blocQuiz = context.read<QuizBloc>();
                     final blocResult = context.read<ResultBloc>();
 
-                    blocQuiz.add(NextQuizEvent());
+                    blocQuiz.add(NextQuizEvent(context: context));
                     blocResult.add(ResultUserEvent(
                       quiz: quiz,
                       context: context,

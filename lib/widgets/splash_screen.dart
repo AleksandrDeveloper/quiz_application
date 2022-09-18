@@ -1,6 +1,8 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 
+import '../uikit/uikit.dart';
+
 class SplashScreen extends StatefulWidget {
   final String image;
   final String title;
@@ -47,7 +49,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 widget.title,
                 textAlign: TextAlign.center,
                 style: theme.textTheme.headline1
-                    ?.copyWith(color: Colors.white, fontSize: 35),
+                    ?.copyWith(color: AppColor.white, fontSize: 35),
               ),
             )
           ],

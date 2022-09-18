@@ -43,7 +43,6 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
     }
     if (categoryName.isNotEmpty && difficultyName.isNotEmpty) {
       blocQuiz.add(FetchQuizEvent(
-        context: event.context,
         categoryName: categoryName,
         difficultyName: difficultyName,
       ));
@@ -52,9 +51,9 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
   }
 
   Future<void> _onNewStart(
-      OnNewStartEvent event,
-      Emitter<WelcomeState> emit,
-      ) async {
+    OnNewStartEvent event,
+    Emitter<WelcomeState> emit,
+  ) async {
     emit(state.copyWith(processState: ProcessState.none));
   }
 }
