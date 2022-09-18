@@ -42,11 +42,14 @@ class _QuizScreenState extends State<QuizScreen> {
             body: ListView(
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: padding),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: padding,
+                    vertical: 20.0,
+                  ),
                   child: Column(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 20.0),
+                        padding: const EdgeInsets.only(bottom: 20.0, top: 20.0),
                         child: Text(
                           quiz!.question ?? '',
                           style: theme.textTheme.headline1

@@ -26,7 +26,10 @@ class ResultScreen extends StatelessWidget {
           body: ListView(
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: padding),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: padding,
+                  vertical: 20.0,
+                ),
                 child: Column(
                   children: [
                     SizedBox(
