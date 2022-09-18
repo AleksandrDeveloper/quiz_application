@@ -32,7 +32,7 @@ class _SplashScreenState extends State<SplashScreen> {
     const padding = 16.0;
 
     return Scaffold(
-      backgroundColor: theme.backgroundColor,
+      backgroundColor: AppColor.background,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: padding),
         child: Column(

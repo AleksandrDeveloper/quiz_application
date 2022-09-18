@@ -33,7 +33,7 @@ class _QuizScreenState extends State<QuizScreen> {
         final quiz = state.quiz;
         if (state.isFinish == false) {
           return Scaffold(
-            backgroundColor: theme.backgroundColor,
+            backgroundColor: AppColor.background,
             appBar: QuizAppBar(
               title: 'Мы начинаем',
               currentStep: state.currentQuiz,

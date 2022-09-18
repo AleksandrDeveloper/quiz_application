@@ -41,11 +41,11 @@ class _FormContainerWelcomeState extends State<FormContainerWelcome> {
           padding: const EdgeInsets.symmetric(
               horizontal: padding, vertical: padding * 2),
           decoration: BoxDecoration(
-            color: theme.cardColor,
+            color: AppColor.white,
             borderRadius: BorderRadius.circular(25.0),
             boxShadow: [
               BoxShadow(
-                color: theme.shadowColor,
+                color: AppColor.primary,
                 spreadRadius: 5,
                 blurRadius: 7,
                 offset: const Offset(0, 3),
@@ -100,8 +100,9 @@ class _FormContainerWelcomeState extends State<FormContainerWelcome> {
               ),
               QuizAppButton(
                 onTap: () => onSave(context),
-                colorText: Colors.white,
-                colorButton: theme.shadowColor,
+                colorText: AppColor.white,
+
+                colorButton: AppColor.primary,
                 title: 'Поехали',
               ),
             ],

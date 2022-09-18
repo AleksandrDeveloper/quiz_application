@@ -18,7 +18,7 @@ class ResultScreen extends StatelessWidget {
       builder: (context, state) {
         final listResult = state.listResult;
         return Scaffold(
-          backgroundColor: theme.backgroundColor,
+          backgroundColor: AppColor.background,
           appBar: const QuizAppBar(
             title: 'Quiz Result',
             isStart: false,

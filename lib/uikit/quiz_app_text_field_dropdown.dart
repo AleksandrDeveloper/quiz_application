@@ -25,6 +25,7 @@ class QuizAppTextFieldDropdown extends StatelessWidget {
     return DropDownTextField(
       singleController: controller,
       clearOption: false,
+      readOnly: true,
       dropDownItemCount: listValueLength ?? 1,
       dropDownList: listValue ?? [],
       textFieldDecoration: InputDecoration(
@@ -32,7 +33,7 @@ class QuizAppTextFieldDropdown extends StatelessWidget {
           borderRadius: BorderRadius.circular(50),
           borderSide: BorderSide(
             width: 3,
-            color: AppColor.background,
+            color: AppColor.primary,
           ),
         ),
         labelStyle: theme.textTheme.bodyText1,
